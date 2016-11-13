@@ -24,8 +24,8 @@ def fit(master_train, master_validation):
     x_validation = mut_validation.drop('loss', axis=1)
 
     #remove id cols
-    mut_train.drop('id', axis=1)
-    mut_validation.drop('id', axis=1)
+    x_train = x_train.drop('id', axis=1)
+    x_validation = x_validation.drop('id', axis=1)
 
     # Split the targets into training/testing sets
     y_train = master_train['loss']
