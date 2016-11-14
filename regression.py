@@ -38,12 +38,14 @@ def fit(master_train, master_validation):
     regr.fit(x_train, y_train)
 
     # Adding predicted loss and error columns to initial datasets
-    output_train['predicted_loss'] = regr.predict(x_train)
-    output_validation['predicted_loss'] = regr.predict(x_validation)
+    output_train['predicted_loss'] = np.exp(regr.predict(x_train))
+    output_validation['predicted_loss'] = np.exp(regr.predict(x_validation))
+    output_train['loss'] = np.exp(output_train['loss'])
+    output_validation['loss'] = np.exp(output_validation['loss'])
     output_train['error'] = output_train['predicted_loss'] - output_train['loss']
     output_validation['error'] = output_validation['predicted_loss'] - output_validation['loss']
     
-    return (output_train, output_validation, regr)
+    return (output_train, output_validation, regr, x_train, x_validation)
 
 
 
